@@ -7,7 +7,7 @@
         body {
             font-family: 'Arial', sans-serif;
             display: flex;
-            flex-direction: column; /* Set flex direction to column */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 50vh;
@@ -16,25 +16,31 @@
         }
         h1 {
             font-size: 3rem;
-            color:aliceblue;
+            color: aliceblue;
         }
         p {
             font-size: 2rem;
-            color:aliceblue;
-            padding: 0 20px;
+            color: aliceblue;
+            padding-left: 30px;
+            padding-right: 30px;
         }
     </style>
     <title>Time Website</title>
 </head>
 <body>
-    <h1 id="timeDisplay">Current Time: Loading time...</h1>
+    <h1 id="timeDisplay">Random Time Zone: Loading...</h1>
     <p id="funFact">Loading fun fact about time...</p>
     
     <script>
-        function updateTime() {
-            const timeElement = document.getElementById('timeDisplay');
-            const currentTime = new Date().toLocaleTimeString();
-            timeElement.innerText = 'Current Time: ' + currentTime;
+        function getRandomTimeZone() {
+            const countries = ['United States', 'Germany', 'Japan', 'Australia', 'Brazil'];
+            const timeZones = ['America/New_York', 'Europe/Berlin', 'Asia/Tokyo', 'Australia/Sydney', 'America/Sao_Paulo'];
+
+            const randomCountryIndex = Math.floor(Math.random() * countries.length);
+            const randomCountry = countries[randomCountryIndex];
+            const randomTimeZone = timeZones[randomCountryIndex]; // Set time zone based on country index
+
+            return { country: randomCountry, timeZone: randomTimeZone };
         }
 
         function getRandomFact() {
@@ -42,7 +48,7 @@
                 'The time it takes for Earth to complete one full rotation on its axis isn\'t exactly 24 hours. It\'s approximately 23 hours, 56 minutes, and 4 seconds.',
                 'Time dilation, according to Einstein\'s theory of relativity, means time can pass at different rates for people who are moving relative to each other.',
                 'Coordinated Universal Time (UTC) occasionally adds or subtracts a leap second to account for irregularities in Earth\'s rotation.',
-                'According to Einsteins theory of relativity, if one twin travels to space at a high speed and then returns, the traveling twin will age more slowly than the twin who stayed on Earth.',
+                'According to Einstein\'s theory of relativity, if one twin travels to space at a high speed and then returns, the traveling twin will age more slowly than the twin who stayed on Earth.',
                 'While time travel as commonly portrayed in science fiction remains speculative, some theories in physics, such as those involving wormholes or time dilation, suggest that time travel could be possible under certain conditions.'
             ];
 
@@ -50,15 +56,26 @@
             return funFacts[randomIndex];
         }
 
-        function displayRandomFact() {
+        function displayRandomInfo() {
+            const randomTimeZone = getRandomTimeZone();
             const funFactElement = document.getElementById('funFact');
-            const randomFact = getRandomFact();
-            funFactElement.innerText = randomFact;
+            const timeDisplayElement = document.getElementById('timeDisplay');
+
+            const options = {
+                timeZone: randomTimeZone.timeZone,
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+
+            const currentTime = new Date().toLocaleTimeString('en-US', options);
+
+            timeDisplayElement.innerText = `Random Time Zone: ${randomTimeZone.country}, ${currentTime}`;
+            funFactElement.innerText = getRandomFact();
         }
 
-        setInterval(updateTime, 1000);
-        updateTime(); 
-        displayRandomFact();
+        setInterval(displayRandomInfo, 10000);
+        displayRandomInfo();
     </script>
 </body>
 </html>

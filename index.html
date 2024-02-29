@@ -7,9 +7,10 @@
         body {
             font-family: 'Arial', sans-serif;
             display: flex;
+            flex-direction: column; /* Set flex direction to column */
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 50vh;
             margin: 0;
             background-image: url(https://imgs.search.brave.com/8dPTxImBt3M8vtVpFfy9-Yg06m0Meyodq9xKkg0ZE0M/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvY2xvY2staDY5/cWtia2VlMnkzd2pv/ZC5qcGc);
         }
@@ -17,11 +18,21 @@
             font-size: 3rem;
             color:aliceblue;
         }
+        p {
+            font-size: 2rem;
+            color:aliceblue;
+            padding: 0 20px;
+        }
     </style>
     <title>Time Website</title>
 </head>
 <body>
     <h1 id="timeDisplay">Current Time: Loading time...</h1>
+    <p>
+        Did you know?
+        The time it takes for Earth to complete one full rotation on its axis isn't exactly 24 hours. It's approximately 23 hours, 56 minutes, and 4 seconds. 
+        To make up for this difference, we have a leap second added to Coordinated Universal Time (UTC) occasionally to keep our clocks in sync with the Earth's rotation.
+    </p>
     
     <script>
         function updateTime() {
